@@ -65,6 +65,5 @@ export interface RootState {
     gameId: number;
     user: string;
     content: string;
-    rating: number;
     createdAt: string;
   }

@@ -1,6 +1,5 @@
 import { axiosInstance } from './api/config';
 import { ENDPOINTS } from './api/endpoints';
-import { GameFilters } from '../types/store.types';
 import { APIResponse } from '../types/api.types';
 import { Game } from '../types/game.types';
 import { GameQueryParams } from '../types/store.types';
@@ -31,12 +30,45 @@ export const gameService = {
     };
   },
 
-  async getGameDetails(id: number): Promise<Game> {
-    const { data } = await axiosInstance.get(ENDPOINTS.GAME_DETAILS(id));
-    return {
-      ...data,
-      price: this.calculateGamePrice(data)
-    };
+  async getGameDetails(id: string | number): Promise<Game> {
+    try {
+      const gameId = id.toString();
+      
+      // Fetch game details, screenshots, and similar games in parallel
+      const [gameResponse, screenshotsResponse, similarGamesResponse] = await Promise.all([
+        axiosInstance.get(ENDPOINTS.GAME_DETAILS(Number(gameId))),
+        axiosInstance.get(ENDPOINTS.GAME_SCREENSHOTS(Number(gameId))),
+        axiosInstance.get(`${ENDPOINTS.GAMES}`, {
+          params: {
+            genres: gameId, 
+            page_size: 6,
+            exclude_current: true
+          }
+        })
+      ]);
+
+      const gameData = gameResponse.data;
+      const screenshots = screenshotsResponse.data.results;
+      const similarGames = similarGamesResponse.data.results.map((game: Game) => ({
+        ...game,
+        price: this.calculateGamePrice(game)
+      }));
+
+      // Combine the data and calculate price
+      const enrichedGame: Game = {
+        ...gameData,
+        screenshots,
+        similar_games: similarGames,
+        price: this.calculateGamePrice(gameData),
+        hasMore: true
+      };
+
+      return enrichedGame;
+
+    } catch (error) {
+      console.error('Error fetching game details:', error);
+      throw error;
+    }
   },
 
   async getGameScreenshots(id: number) {

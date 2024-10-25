@@ -42,13 +42,14 @@ export const fetchGames = createAsyncThunk<
 
 export const fetchGameDetails = createAsyncThunk<
   Game,
-  number
+  number,
+  { rejectValue: string }
 >('games/fetchGameDetails', async (gameId, { rejectWithValue }) => {
   try {
-    const response = await gameService.getGameDetails(gameId);
-    return response;
+    const enrichedGameData = await gameService.getGameDetails(gameId);
+    return enrichedGameData;
   } catch (error) {
-    return rejectWithValue((error as Error).message);
+    return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch game details');
   }
 });
 

@@ -1,0 +1,158 @@
+/* src/components/features/Games/GameDetails/SimilarGames/SimilarGames.module.css */
+.container {
+    background-color: var(--background-card);
+    border-radius: 1rem;
+    padding: var(--spacing-xl);
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  
+  .gameCard {
+    background-color: var(--background-hover);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .gameCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .gameCard:hover .image {
+    transform: scale(1.05);
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.7)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .showOverlay {
+    opacity: 1;
+  }
+  
+  .viewDetails {
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+    transform: translateY(10px);
+    transition: transform 0.2s ease;
+  }
+  
+  .showOverlay .viewDetails {
+    transform: translateY(0);
+  }
+  
+  .content {
+    padding: var(--spacing-md);
+  }
+  
+  .gameName {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+  
+  .ratingValue {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .platforms {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+  
+  .price {
+    color: var(--success-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  
+  /* Animation for card appearance */
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .gameCard {
+    animation: cardAppear 0.3s ease forwards;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .container {
+      padding: var(--spacing-lg);
+    }
+  
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  }
