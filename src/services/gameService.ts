@@ -3,23 +3,25 @@ import { ENDPOINTS } from './api/endpoints';
 import { GameFilters } from '../types/store.types';
 import { APIResponse } from '../types/api.types';
 import { Game } from '../types/game.types';
+import { GameQueryParams } from '../types/store.types';
 
-export interface GameQueryParams {
-  page?: number;
-  page_size?: number;
-  search?: string;
-  parent_platforms?: string;
-  genre?: string;      // Changed from genres to genre
-  ordering?: string;   // This is what RAWG expects for sorting
-}
+
 
 export const gameService = {
   async getGames(params: GameQueryParams = {}): Promise<APIResponse<Game>> {
-    console.log('Fetching games with params:', params);
-    
-
-  
-    const { data } = await axiosInstance.get(ENDPOINTS.GAMES, { params });
+    // Transform params to match API expectations
+    const apiParams = {
+      ...params,
+      genres: params.genres || undefined,  // Only include if it exists
+      parent_platforms: params.parent_platforms || undefined,
+      ordering: params.ordering || undefined,
+      page: params.page || 1
+    };
+   
+    const { data } = await axiosInstance.get(ENDPOINTS.GAMES, { 
+      params: apiParams
+    });
+        
     return {
       ...data,
       results: data.results.map((game: Game) => ({

@@ -18,7 +18,7 @@ export interface Game {
   export interface Genre {
     id: number;
     name: string;
-    slug: string;
+    slug: string;  
   }
   
   export interface Platform {

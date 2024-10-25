@@ -14,12 +14,12 @@ export const axiosInstance = axios.create({
   }
 });
 
-// Add response interceptor for error handling
-axiosInstance.interceptors.response.use(
-  response => response,
+// Add request interceptor to log the full URL and params
+axiosInstance.interceptors.request.use(
+  config => {
+    return config;
+  },
   error => {
-    const message = error.response?.data?.message || 'An error occurred';
-    console.error('API Error:', message);
     return Promise.reject(error);
   }
 );

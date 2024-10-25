@@ -49,24 +49,24 @@ const GameFilters: React.FC<GameFiltersProps> = ({
 
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
-  const genres = [
-    { name: "Action", id: 4 },
-    { name: "Adventure", id: 3 },
-    { name: "RPG", id: 5 },
-    { name: "Strategy", id: 10 },
-    { name: "Shooter", id: 2 },
-    { name: "Simulation", id: 14 },
-    { name: "Sports", id: 15 },
-    { name: "Puzzle", id: 7 },
+  const platforms = [
+    { name: "PC", id: 1, key: "pc-1" }, // Added key for React
+    { name: "PlayStation 5", id: 187, key: "ps5-187" },
+    { name: "Xbox Series X", id: 186, key: "xbox-186" },
+    { name: "Nintendo Switch", id: 7, key: "switch-7" },
+    { name: "PlayStation 4", id: 18, key: "ps4-18" },
+    { name: "Xbox One", id: 1, key: "xbox-1" },
   ];
 
-  const platforms = [
-    { name: "PC", id: 1 },
-    { name: "PlayStation 5", id: 187 },
-    { name: "Xbox Series X", id: 186 },
-    { name: "Nintendo Switch", id: 7 }, // Nintendo Switch's platform ID is 7
-    { name: "PlayStation 4", id: 18 },
-    { name: "Xbox One", id: 1 },
+  const genres = [
+    { name: "Action", id: 4, slug: "action" },
+    { name: "Adventure", id: 3, slug: "adventure" },
+    { name: "RPG", id: 5, slug: "role-playing-games-rpg" },
+    { name: "Strategy", id: 10, slug: "strategy" },
+    { name: "Shooter", id: 2, slug: "shooter" },
+    { name: "Simulation", id: 14, slug: "simulation" },
+    { name: "Sports", id: 15, slug: "sports" },
+    { name: "Puzzle", id: 7, slug: "puzzle" }  
   ];
 
   const sortOptions = [
@@ -90,16 +90,24 @@ const GameFilters: React.FC<GameFiltersProps> = ({
     setActiveFiltersCount(count);
   }, [localFilters]);
 
-  const handleGenreToggle = (genre: { name: string; id: number }) => {
+  const handleGenreToggle = (genre: {
+    name: string;
+    id: number;
+    slug: string;
+  }) => {
     setLocalFilters((prev) => ({
       ...prev,
-      genres: prev.genres.includes(genre.id.toString())
-        ? prev.genres.filter((g) => g !== genre.id.toString())
-        : [...prev.genres, genre.id.toString()],
+      genres: prev.genres.includes(genre.slug) // Use slug instead of id
+        ? prev.genres.filter((g) => g !== genre.slug)
+        : [...prev.genres, genre.slug],
     }));
   };
 
-  const handlePlatformToggle = (platform: { name: string; id: number }) => {
+  const handlePlatformToggle = (platform: {
+    name: string;
+    id: number;
+    key: string;
+  }) => {
     setLocalFilters((prev) => ({
       ...prev,
       platforms: prev.platforms.includes(platform.id.toString())
@@ -130,10 +138,10 @@ const GameFilters: React.FC<GameFiltersProps> = ({
   const handleApplyFilters = () => {
     const outputFilters: GameFiltersOutput = {
       search: localFilters.search,
-      genre: localFilters.genres.join(","),
-      platform: localFilters.platforms.join(","),
+      genre: localFilters.genres.join(','),  // We're joining the slugs directly
+      platform: localFilters.platforms.join(','),
       releaseDate: localFilters.releaseDate,
-      sortBy: localFilters.sortBy, // Add this
+      sortBy: localFilters.sortBy
     };
     onFilterChange(outputFilters);
     setIsExpanded(false);
@@ -203,7 +211,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
                   <button
                     key={genre.id}
                     className={`${styles.tag} ${
-                      localFilters.genres.includes(genre.id.toString())
+                      localFilters.genres.includes(genre.slug) // Use slug here too
                         ? styles.active
                         : ""
                     }`}
@@ -221,7 +229,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
               <div className={styles.tagsContainer}>
                 {platforms.map((platform) => (
                   <button
-                    key={platform.id}
+                    key={platform.key} // Use the unique key here
                     className={`${styles.tag} ${
                       localFilters.platforms.includes(platform.id.toString())
                         ? styles.active

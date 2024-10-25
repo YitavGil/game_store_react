@@ -1,14 +1,13 @@
 import { Game } from "./game.types";
 
 export interface GameQueryParams {
-  page: number;
+  page?: number;
   search?: string;
-  genre?: string;         
+  genres?: string;        // Changed from genre to genres
   parent_platforms?: string;
   releaseDate?: string;
-  ordering?: string;        // Changed from sortBy to ordering to match RAWG API
+  ordering?: string;
 }
-
 export interface RootState {
     games: GamesState;
     cart: CartState;

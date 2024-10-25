@@ -7,6 +7,7 @@ import GameFiltersComponent, { GameFiltersOutput } from '../../components/featur
 import { GameList } from '../../components/features/Games/GameList/GameList';
 import { setFilters, fetchGames } from '../../store/features/games/gamesSlice';
 import { RootState } from '../../store/store';
+import { GameQueryParams } from '../../types/store.types';
 import styles from './HomePage.module.css';
 
 export const HomePage: React.FC = () => {
@@ -14,14 +15,17 @@ export const HomePage: React.FC = () => {
   const currentFilters = useSelector((state: RootState) => state.games.filters);
 
   const handleFilterChange = (newFilters: GameFiltersOutput) => {
-    dispatch(setFilters(newFilters));
-    dispatch(fetchGames({ 
+    
+    const queryParams: GameQueryParams = {
       page: 1,
-      search: newFilters.search,
+      genres: newFilters.genre,    
       parent_platforms: newFilters.platform,
-      genre: newFilters.genre,        // Changed from genres to genre
-      ordering: newFilters.sortBy     // This maps to RAWG's ordering parameter
-    }));
+      ordering: newFilters.sortBy,
+      search: newFilters.search
+    };
+        
+    dispatch(setFilters(newFilters));
+    dispatch(fetchGames(queryParams));
   };
 
   return (
