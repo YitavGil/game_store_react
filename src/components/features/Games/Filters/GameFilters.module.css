@@ -58,6 +58,11 @@
   }
   
   .expandedContent {
+    position: absolute; 
+    top: 100%;          
+    left: 0;           
+    right: 0;           
+    z-index: 10;       
     background: var(--background-card);
     border-radius: 12px;
     padding: var(--spacing-xl);
@@ -165,7 +170,7 @@
   @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-20px);
     }
     to {
       opacity: 1;

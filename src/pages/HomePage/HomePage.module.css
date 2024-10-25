@@ -21,8 +21,10 @@
 }
 
 .searchRow {
+  position: relative;  /* Add this */
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;  /* Add some space for the filter panel */
 }

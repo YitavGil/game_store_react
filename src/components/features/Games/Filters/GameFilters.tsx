@@ -11,7 +11,6 @@ interface LocalGameFilters {
   releaseDate: string;
   genres: string[];
   platforms: string[];
-  priceRange: number[];
   sortBy: string;
 }
 
@@ -43,7 +42,6 @@ const GameFilters: React.FC<GameFiltersProps> = ({
     platforms: initialFilters.platform
       ? initialFilters.platform.split(",").filter(Boolean)
       : [],
-    priceRange: [0, 100],
     sortBy: "relevance",
   });
 
@@ -83,10 +81,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
     const count =
       localFilters.genres.length +
       localFilters.platforms.length +
-      (localFilters.sortBy !== "relevance" ? 1 : 0) +
-      (localFilters.priceRange[0] > 0 || localFilters.priceRange[1] < 100
-        ? 1
-        : 0);
+      (localFilters.sortBy !== "relevance" ? 1 : 0)
     setActiveFiltersCount(count);
   }, [localFilters]);
 
@@ -116,17 +111,6 @@ const GameFilters: React.FC<GameFiltersProps> = ({
     }));
   };
 
-  const handlePriceRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    const isMin = e.target.name === "minPrice";
-
-    setLocalFilters((prev) => ({
-      ...prev,
-      priceRange: isMin
-        ? [value, prev.priceRange[1]]
-        : [prev.priceRange[0], value],
-    }));
-  };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSortBy = e.target.value;
@@ -167,7 +151,6 @@ const GameFilters: React.FC<GameFiltersProps> = ({
       releaseDate: "",
       genres: [],
       platforms: [],
-      priceRange: [0, 100],
       sortBy: "relevance",
     };
 
@@ -255,31 +238,6 @@ const GameFilters: React.FC<GameFiltersProps> = ({
               </div>
             </div>
 
-            {/* Price Range */}
-            <div className={styles.filterSection}>
-              <h3>Price Range</h3>
-              <div className={styles.priceInputs}>
-                <input
-                  type="number"
-                  name="minPrice"
-                  min="0"
-                  max={localFilters.priceRange[1]}
-                  value={localFilters.priceRange[0]}
-                  onChange={handlePriceRangeChange}
-                  className={styles.priceInput}
-                />
-                <span>to</span>
-                <input
-                  type="number"
-                  name="maxPrice"
-                  min={localFilters.priceRange[0]}
-                  max="100"
-                  value={localFilters.priceRange[1]}
-                  onChange={handlePriceRangeChange}
-                  className={styles.priceInput}
-                />
-              </div>
-            </div>
           </div>
 
           <div className={styles.actions}>
