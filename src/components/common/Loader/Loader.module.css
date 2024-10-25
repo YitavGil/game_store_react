@@ -1,0 +1,82 @@
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .fullScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+  }
+  
+  .loader {
+    position: relative;
+  }
+  
+  .spinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: rotate 1.2s steps(12) infinite;
+  }
+  
+  .blade {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    background: var(--primary-color);
+    transform-origin: 0% 100%;
+    animation: pulse 1s infinite;
+  }
+  
+  /* Sizes */
+  .small {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .small .blade {
+    height: 8px;
+  }
+  
+  .medium {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .medium .blade {
+    height: 14px;
+  }
+  
+  .large {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .large .blade {
+    height: 24px;
+  }
+  
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

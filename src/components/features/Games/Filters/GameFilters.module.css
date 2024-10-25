@@ -1,0 +1,192 @@
+/* src/components/features/Games/Filters/GameFilters.module.css */
+.container {
+    width: 100%;
+
+  }
+  
+  .topBar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .filterButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    background: var(--background-card);
+    border: 1px solid var(--background-hover);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .filterButton:hover,
+  .filterButton.active {
+    background: var(--background-hover);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .badge {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: var(--spacing-sm);
+  }
+  
+  .sortSelect {
+    padding: 0.5rem;
+    background: var(--background-card);
+    border: 1px solid var(--background-hover);
+    border-radius: 8px;
+    color: var(--text-primary);
+    min-width: 180px;
+    cursor: pointer;
+  }
+  
+  .sortSelect:hover {
+    border-color: var(--primary-color);
+  }
+  
+  .expandedContent {
+    background: var(--background-card);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-md);
+    animation: slideDown 0.3s ease-out;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .filtersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .filterSection h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  .tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .tag {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--background-hover);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .tag:hover {
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+  }
+  
+  .tag.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+  }
+  
+  .priceInputs {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .priceInput {
+    width: 80px;
+    padding: 0.5rem;
+    background: var(--background-dark);
+    border: 1px solid var(--background-hover);
+    border-radius: 6px;
+    color: var(--text-primary);
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--background-hover);
+  }
+  
+  .clearButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .clearButton:hover {
+    color: var(--text-primary);
+  }
+  
+  .applyButton {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .applyButton:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .filtersGrid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+    
+    .actions {
+      flex-direction: column;
+    }
+    
+    .clearButton,
+    .applyButton {
+      width: 100%;
+      justify-content: center;
+    }
+  }

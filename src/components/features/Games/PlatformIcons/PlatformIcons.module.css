@@ -1,0 +1,21 @@
+.platforms {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.platformIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.platformIcon:hover {
+  transform: translateY(-2px);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}

@@ -1,0 +1,100 @@
+.button {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Variants */
+  .primary {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  .primary:hover:not(:disabled) {
+    background: var(--primary-color-dark);
+    transform: translateY(-1px);
+  }
+  
+  .secondary {
+    background: var(--secondary-color);
+    color: white;
+  }
+  
+  .secondary:hover:not(:disabled) {
+    background: var(--secondary-color-dark);
+    transform: translateY(-1px);
+  }
+  
+  .outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+  
+  .outline:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  /* Sizes */
+  .small {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .medium {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  
+  .large {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+  
+  .fullWidth {
+    width: 100%;
+  }
+  
+  /* Loading State */
+  .loading {
+    position: relative;
+    color: transparent;
+  }
+  
+  .loadingSpinner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+  }
+
+  .light {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+  
+  .light:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
