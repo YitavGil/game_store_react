@@ -18,12 +18,12 @@ export const HomePage: React.FC = () => {
     
     const queryParams: GameQueryParams = {
       page: 1,
-      genres: newFilters.genre,    
+      search: newFilters.search,
+      genres: newFilters.genre,
       parent_platforms: newFilters.platform,
-      ordering: newFilters.sortBy,
-      search: newFilters.search
+      ordering: newFilters.sortBy || undefined  
     };
-        
+    
     dispatch(setFilters(newFilters));
     dispatch(fetchGames(queryParams));
   };

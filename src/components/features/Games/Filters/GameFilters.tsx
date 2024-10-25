@@ -77,7 +77,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
     { value: "rating", label: "Rating: Low to High" },
     { value: "name", label: "Name: A-Z" },
     { value: "-name", label: "Name: Z-A" },
-  ];
+];
 
   useEffect(() => {
     const count =
@@ -129,10 +129,22 @@ const GameFilters: React.FC<GameFiltersProps> = ({
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSortBy = e.target.value;
+    
     setLocalFilters((prev) => ({
       ...prev,
-      sortBy: e.target.value,
+      sortBy: newSortBy,
     }));
+  
+    // Immediately apply the sort
+    const outputFilters: GameFiltersOutput = {
+      search: localFilters.search,
+      genre: localFilters.genres.join(','),
+      platform: localFilters.platforms.join(','),
+      releaseDate: localFilters.releaseDate,
+      sortBy: newSortBy  // Use the new value directly
+    };
+    onFilterChange(outputFilters);
   };
 
   const handleApplyFilters = () => {
