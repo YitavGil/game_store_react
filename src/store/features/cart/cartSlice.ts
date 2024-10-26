@@ -1,16 +1,47 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { CartState, CartItem } from '../../../types/store.types';
 import { Game } from '../../../types/game.types';
+import { showToast } from '../ui/uiSlice';
+import { storageService } from '../../../services';
 
-const initialState: CartState = {
-  items: [],
-  total: 0,
-  isOpen: false,
+const calculateTotal = (items: CartItem[]): number => {
+  return items.reduce((total, item) => {
+    const discount = item.game.rating > 4 ? 0.2 : item.game.rating > 3 ? 0.1 : 0;
+    const finalPrice = item.game.price * (1 - discount);
+    return total + finalPrice * item.quantity;
+  }, 0);
 };
+
+const loadInitialState = (): CartState => {
+  const savedCart = storageService.getItem<CartItem[]>('CART');
+  if (savedCart) {
+    return {
+      items: savedCart,
+      total: calculateTotal(savedCart),
+      isOpen: false,
+    };
+  }
+  return {
+    items: [],
+    total: 0,
+    isOpen: false,
+  };
+};
+
+export const addToCartWithNotification = createAsyncThunk<void, Game>(
+  'cart/addToCartWithNotification',
+  async (game, { dispatch }) => {
+    dispatch(addToCart(game));
+    dispatch(showToast({
+      message: `${game.name} added to cart!`,
+      type: 'success',
+    }));
+  }
+);
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: loadInitialState(),
   reducers: {
     addToCart: (state, action: PayloadAction<Game>) => {
       const existingItem = state.items.find(
@@ -23,10 +54,12 @@ const cartSlice = createSlice({
         state.items.push({ game: action.payload, quantity: 1 });
       }
       state.total = calculateTotal(state.items);
+      storageService.setItem('CART', state.items);
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.game.id !== action.payload);
       state.total = calculateTotal(state.items);
+      storageService.setItem('CART', state.items);
     },
     updateQuantity: (
       state,
@@ -38,21 +71,19 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity = action.payload.quantity;
         state.total = calculateTotal(state.items);
+        storageService.setItem('CART', state.items);
       }
     },
     clearCart: (state) => {
       state.items = [];
       state.total = 0;
+      storageService.removeItem('CART');
     },
     toggleCart: (state) => {
       state.isOpen = !state.isOpen;
     },
-  },
+  }
 });
-
-const calculateTotal = (items: CartItem[]): number => {
-  return items.reduce((total, item) => total + item.game.price * item.quantity, 0);
-};
 
 export const {
   addToCart,
@@ -61,4 +92,5 @@ export const {
   clearCart,
   toggleCart,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;

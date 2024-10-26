@@ -1,10 +1,18 @@
+// src/store/features/ui/uiSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface ToastMessage {
+  id: string;
+  message: string;
+  type: 'success' | 'error' | 'info';
+}
 
 interface UIState {
   theme: 'light' | 'dark';
   isFiltersOpen: boolean;
   isSearchOpen: boolean;
   activeModal: string | null;
+  toasts: ToastMessage[]; 
 }
 
 const initialState: UIState = {
@@ -12,6 +20,7 @@ const initialState: UIState = {
   isFiltersOpen: false,
   isSearchOpen: false,
   activeModal: null,
+  toasts: [], 
 };
 
 const uiSlice = createSlice({
@@ -30,9 +39,25 @@ const uiSlice = createSlice({
     setActiveModal: (state, action: PayloadAction<string | null>) => {
       state.activeModal = action.payload;
     },
+    showToast: (state, action: PayloadAction<Omit<ToastMessage, 'id'>>) => {
+      state.toasts.push({
+        ...action.payload,
+        id: Date.now().toString(),
+      });
+    },
+    removeToast: (state, action: PayloadAction<string>) => {
+      state.toasts = state.toasts.filter(toast => toast.id !== action.payload);
+    },
   },
 });
 
-export const { toggleTheme, toggleFilters, toggleSearch, setActiveModal } =
-  uiSlice.actions;
+export const { 
+  toggleTheme, 
+  toggleFilters, 
+  toggleSearch, 
+  setActiveModal,
+  showToast,
+  removeToast 
+} = uiSlice.actions;
+
 export default uiSlice.reducer;

@@ -86,6 +86,23 @@
   .cartButton:hover {
     transform: scale(1.1);
   }
+
+  .cartContainer {
+    position: relative;
+  }
+  
+  .cartButton {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    transition: color 0.2s;
+  }
+  
+  .cartButton:hover {
+    color: var(--accent-color);
+  }
   
   @keyframes float {
     0%, 100% {

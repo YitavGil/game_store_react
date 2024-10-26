@@ -1,4 +1,3 @@
-// src/pages/HomePage/HomePage.tsx
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';

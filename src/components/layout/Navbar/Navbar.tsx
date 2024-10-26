@@ -1,13 +1,16 @@
+// src/components/layout/Navbar/Navbar.tsx
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { toggleCart } from '../../../store/features/cart/cartSlice';
 import { CartIcon } from '../../features/Cart/CartIcon/CartIcon';
+import { CartDropdown } from '../../features/Cart/CartDropdown/CartDropdown';
 import styles from './Navbar.module.css';
 import classNames from 'classnames';
 
 export const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const cartItemsCount = useAppSelector(state => 
@@ -23,6 +26,14 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleCartClick = () => {
+    if (location.pathname === '/cart') {
+      dispatch(toggleCart());
+    } else {
+      navigate('/cart');
+    }
+  };
+
   return (
     <nav className={classNames(styles.navbar, { [styles.scrolled]: isScrolled })}>
       <div className={styles.content}>
@@ -36,12 +47,15 @@ export const Navbar: React.FC = () => {
             ❤️
           </Link>
           
-          <button 
-            className={styles.cartButton}
-            onClick={() => dispatch(toggleCart())}
-          >
-            <CartIcon count={cartItemsCount} />
-          </button>
+          <div className={styles.cartContainer}>
+            <button 
+              className={styles.cartButton}
+              onClick={handleCartClick}
+            >
+              <CartIcon count={cartItemsCount} />
+            </button>
+            <CartDropdown />
+          </div>
         </div>
       </div>
     </nav>

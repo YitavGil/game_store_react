@@ -3,7 +3,7 @@ import { Game } from "./game.types";
 export interface GameQueryParams {
   page?: number;
   search?: string;
-  genres?: string;        // Changed from genre to genres
+  genres?: string;        
   parent_platforms?: string;
   releaseDate?: string;
   ordering?: string;
@@ -12,6 +12,21 @@ export interface RootState {
     games: GamesState;
     cart: CartState;
     comments: CommentsState;
+    ui: UIState;
+  }
+
+  export interface UIState {
+    theme: 'light' | 'dark';
+    isFiltersOpen: boolean;
+    isSearchOpen: boolean;
+    activeModal: string | null;
+    toasts: ToastMessage[];
+  }
+
+  export interface ToastMessage {
+    id: string;
+    message: string;
+    type: 'success' | 'error' | 'info';
   }
   
   export interface GamesState {

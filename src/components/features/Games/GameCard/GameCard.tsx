@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { addToCart } from "../../../../store/features/cart/cartSlice";
+import { addToCartWithNotification } from "../../../../store/features/cart/cartSlice";
 import { toggleFavorite } from "../../../../store/features/user/userSlice";
 import { StarRating } from "../../Rating/StarRating/StarRating";
 import { Button } from "../../../common/Button/Button";
@@ -28,9 +28,9 @@ export const GameCard: React.FC<GameCardProps> = ({ game, className }) => {
     navigate(`/game/${game.id}`);
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    dispatch(addToCart(game));
+  const handleAddToCart = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    dispatch(addToCartWithNotification(game));
   };
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
