@@ -1,4 +1,3 @@
-// src/pages/CartPage/CartPage.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';

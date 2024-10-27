@@ -11,7 +11,7 @@ const initialState: CommentsState = {
 export const addComment = createAsyncThunk(
   'comments/addComment',
   async (comment: Omit<Comment, 'id' | 'createdAt'>) => {
-    // Simulating API call
+    
     return {
       ...comment,
       id: uuidv4(),

@@ -25,8 +25,8 @@ export const GameList: React.FC = () => {
       dispatch(fetchGames({ 
         page: page + 1,
         search: filters.search,
-        parent_platforms: filters.platform,  // Changed to parent_platforms
-        genre: filters.genre,
+        parent_platforms: filters.platform, 
+        genres: filters.genre,
         ordering: filters.sortBy
       }));
     }

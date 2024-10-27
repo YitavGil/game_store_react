@@ -1,4 +1,3 @@
-// src/components/features/Games/GameDetails/GameDetailsHero/GameDetailsHero.tsx
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToCart } from '../../../../../store/features/cart/cartSlice';

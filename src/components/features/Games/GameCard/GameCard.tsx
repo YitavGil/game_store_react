@@ -38,7 +38,6 @@ export const GameCard: React.FC<GameCardProps> = ({ game, className }) => {
     dispatch(toggleFavorite(game.id));
   };
 
-  // Calculate discount and final price (this could come from an API in real world)
   const discount = game.rating > 4 ? 20 : game.rating > 3 ? 10 : 0;
   const finalPrice = game.price * (1 - discount / 100);
 
@@ -122,7 +121,6 @@ export const GameCard: React.FC<GameCardProps> = ({ game, className }) => {
   );
 };
 
-// Helper function for platform icons (could be moved to utils)
 const getPlatformIcon = (platform: string): string => {
   const platformIcons: { [key: string]: string } = {
     PlayStation: "🎮",

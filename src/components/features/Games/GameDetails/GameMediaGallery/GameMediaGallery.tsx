@@ -1,4 +1,3 @@
-// src/components/features/Games/GameDetails/GameMediaGallery/GameMediaGallery.tsx
 import React, { useState } from 'react';
 import { Screenshot } from '../../../../../types/game.types';
 import styles from './GameMediaGallery.module.css';

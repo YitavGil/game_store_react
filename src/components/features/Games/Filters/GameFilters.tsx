@@ -1,4 +1,3 @@
-// src/components/features/Games/Filters/GameFilters.tsx
 import React, { useState, useEffect } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import styles from "./GameFilters.module.css";
@@ -19,7 +18,7 @@ export interface GameFiltersOutput {
   genre: string;
   platform: string;
   releaseDate: string;
-  sortBy: string; // Add this back
+  sortBy: string; 
 }
 interface GameFiltersProps {
   onFilterChange: (filters: GameFiltersOutput) => void;
@@ -48,7 +47,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
   const platforms = [
-    { name: "PC", id: 1, key: "pc-1" }, // Added key for React
+    { name: "PC", id: 1, key: "pc-1" }, 
     { name: "PlayStation 5", id: 187, key: "ps5-187" },
     { name: "Xbox Series X", id: 186, key: "xbox-186" },
     { name: "Nintendo Switch", id: 7, key: "switch-7" },
@@ -92,7 +91,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
   }) => {
     setLocalFilters((prev) => ({
       ...prev,
-      genres: prev.genres.includes(genre.slug) // Use slug instead of id
+      genres: prev.genres.includes(genre.slug) 
         ? prev.genres.filter((g) => g !== genre.slug)
         : [...prev.genres, genre.slug],
     }));
@@ -120,13 +119,12 @@ const GameFilters: React.FC<GameFiltersProps> = ({
       sortBy: newSortBy,
     }));
   
-    // Immediately apply the sort
     const outputFilters: GameFiltersOutput = {
       search: localFilters.search,
       genre: localFilters.genres.join(','),
       platform: localFilters.platforms.join(','),
       releaseDate: localFilters.releaseDate,
-      sortBy: newSortBy  // Use the new value directly
+      sortBy: newSortBy  
     };
     onFilterChange(outputFilters);
   };
@@ -134,7 +132,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
   const handleApplyFilters = () => {
     const outputFilters: GameFiltersOutput = {
       search: localFilters.search,
-      genre: localFilters.genres.join(','),  // We're joining the slugs directly
+      genre: localFilters.genres.join(','), 
       platform: localFilters.platforms.join(','),
       releaseDate: localFilters.releaseDate,
       sortBy: localFilters.sortBy
@@ -159,7 +157,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
       genre: "",
       platform: "",
       releaseDate: "",
-      sortBy: "relevance", // Add this
+      sortBy: "relevance",
     };
 
     setLocalFilters(clearedLocalFilters);
@@ -206,7 +204,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
                   <button
                     key={genre.id}
                     className={`${styles.tag} ${
-                      localFilters.genres.includes(genre.slug) // Use slug here too
+                      localFilters.genres.includes(genre.slug) 
                         ? styles.active
                         : ""
                     }`}
@@ -224,7 +222,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({
               <div className={styles.tagsContainer}>
                 {platforms.map((platform) => (
                   <button
-                    key={platform.key} // Use the unique key here
+                    key={platform.key} 
                     className={`${styles.tag} ${
                       localFilters.platforms.includes(platform.id.toString())
                         ? styles.active

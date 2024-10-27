@@ -1,4 +1,3 @@
-/* src/components/features/Games/GameDetails/GameDetailsHero/GameDetailsHero.module.css */
 .hero {
     position: relative;
     width: 100%;
@@ -143,7 +142,6 @@
     font-size: 1.25rem;
   }
   
-  /* Media Queries */
   @media (max-width: 768px) {
     .hero {
       height: auto;

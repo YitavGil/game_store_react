@@ -13,13 +13,3 @@ export const axiosInstance = axios.create({
     key: API_KEY
   }
 });
-
-// Add request interceptor to log the full URL and params
-axiosInstance.interceptors.request.use(
-  config => {
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);

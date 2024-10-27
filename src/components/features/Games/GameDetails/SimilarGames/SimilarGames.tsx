@@ -1,4 +1,3 @@
-// src/components/features/Games/GameDetails/SimilarGames/SimilarGames.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Game } from '../../../../../types/game.types';
@@ -15,7 +14,6 @@ export const SimilarGames: React.FC<SimilarGamesProps> = ({ games, currentGameId
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Filter out the current game and limit to 6 games
   const filteredGames = games
     .filter(game => game.id !== currentGameId)
     .slice(0, 6);

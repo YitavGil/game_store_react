@@ -1,4 +1,3 @@
-// src/store/features/ui/uiSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ToastMessage {

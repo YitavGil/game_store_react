@@ -1,4 +1,3 @@
-// src/pages/GameDetailsPage/GameDetailsPage.tsx
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";

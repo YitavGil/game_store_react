@@ -11,7 +11,7 @@ export const gameService = {
     // Transform params to match API expectations
     const apiParams = {
       ...params,
-      genres: params.genres || undefined,  // Only include if it exists
+      genres: params.genres || undefined, 
       parent_platforms: params.parent_platforms || undefined,
       ordering: params.ordering || undefined,
       page: params.page || 1
@@ -34,7 +34,6 @@ export const gameService = {
     try {
       const gameId = id.toString();
       
-      // Fetch game details, screenshots, and similar games in parallel
       const [gameResponse, screenshotsResponse, similarGamesResponse] = await Promise.all([
         axiosInstance.get(ENDPOINTS.GAME_DETAILS(Number(gameId))),
         axiosInstance.get(ENDPOINTS.GAME_SCREENSHOTS(Number(gameId))),

@@ -1,4 +1,3 @@
-// src/components/features/Games/GameDetails/GameDetailsContent/GameDetailsContent.tsx
 import React from 'react';
 import styles from './GameDetailsContent.module.css';
 import { Game } from '../../../../../types/game.types';

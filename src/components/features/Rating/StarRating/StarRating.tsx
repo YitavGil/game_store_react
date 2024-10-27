@@ -1,4 +1,3 @@
-// src/components/features/Rating/StarRating/StarRating.tsx
 import React from 'react';
 import styles from './StarRating.module.css';
 
@@ -7,7 +6,7 @@ interface StarRatingProps {
   readOnly?: boolean;
   size?: 'small' | 'medium' | 'large';
   maxStars?: number;
-  showValue?: boolean; // Add this prop to control rating number visibility
+  showValue?: boolean;
 }
 
 export const StarRating: React.FC<StarRatingProps> = ({
@@ -15,7 +14,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
   readOnly = false,
   size = 'medium',
   maxStars = 5,
-  showValue = false // Default to false
+  showValue = false 
 }) => {
   const fullStars = Math.floor(value);
   const hasHalf = value % 1 !== 0;

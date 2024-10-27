@@ -1,4 +1,3 @@
-// src/components/features/Games/PlatformIcons/PlatformIcons.tsx
 import React from 'react';
 import CIcon from '@coreui/icons-react';
 import { 
@@ -25,25 +24,25 @@ export const PlatformIcons: React.FC<PlatformIconsProps> = ({ platforms }) => {
     if (name.includes('playstation')) {
       return {
         icon: cibPlaystation,
-        color: '#006FCD', // PlayStation Blue
+        color: '#006FCD', 
       };
     }
     if (name.includes('xbox')) {
       return {
         icon: cibXbox,
-        color: '#107C10', // Xbox Green
+        color: '#107C10', 
       };
     }
     if (name.includes('pc') || name.includes('windows')) {
       return {
         icon: cibWindows,
-        color: '#00A4EF', // Windows Blue
+        color: '#00A4EF', 
       };
     }
     if (name.includes('nintendo')) {
       return {
         icon: cibNintendo,
-        color: '#E60012', // Nintendo Red
+        color: '#E60012', 
       };
     }
     return null;

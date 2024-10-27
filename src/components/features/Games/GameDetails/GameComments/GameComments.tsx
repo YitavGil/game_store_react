@@ -1,4 +1,3 @@
-// src/components/features/Games/GameDetails/GameComments/GameComments.tsx
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addComment } from '../../../../../store/features/comments/commentsSlice';
@@ -48,7 +47,6 @@ export const GameComments: React.FC<GameCommentsProps> = ({ gameId }) => {
         user: formData.user.trim(),
       })).unwrap();
 
-      // Reset form after successful submission
       setFormData({ content: '', user: '' });
     } catch (err) {
       setFormError('Failed to post comment. Please try again.');
